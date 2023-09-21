@@ -1,0 +1,41 @@
+.navbar {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 10vw;
+  height: 80px;
+  width: 80vw;
+  padding: 25px 0;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.input,
+.input:focus {
+  height: 40px;
+  background-color: #330969;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  z-index: -10;
+  color: white;
+}
+
+.search-bar,
+.search-bar:focus {
+  width: 60%;
+  padding: 5px 10px 5px 35px;
+}
+
+.select-bar {
+  width: 30%;
+  padding: 5px 15px;
+}
+
+.search-icon {
+  position: absolute;
+  height: 20px;
+  left: 10px;
+  top: 35px;
+}

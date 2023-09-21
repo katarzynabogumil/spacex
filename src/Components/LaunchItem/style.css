@@ -1,0 +1,21 @@
+.launch_container {
+  height: 25vh;
+  width: 20vh;
+  margin: 15px;
+}
+
+.launch_img {
+  height: 20vh;
+  width: 20vh;
+}
+
+.launch_name {
+  text-align: center;
+}
+
+.background {
+  height: 20vh;
+  width: 20vh;
+  background-color: lightgray;
+  opacity: 20%;
+}
