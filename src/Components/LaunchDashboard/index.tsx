@@ -68,7 +68,6 @@ function LaunchDashboard() {
         </select>
       </div>
       <div className="launch-dashboard" data-testid="launch-dashboard">
-        {launches.length}
           {!loading ? 
               <LaunchList launches={searchedLaunches.length ? searchedLaunches : launches} />
             : (
