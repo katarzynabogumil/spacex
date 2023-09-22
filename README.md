@@ -52,6 +52,7 @@ Information about all components are also summerized here:
 * [React](https://react.dev/)
 * Testing:
   * [Jest](https://jestjs.io/)
+  * [Cypress](https://www.cypress.io/)
 * Other dependencies
   * [Typescript](https://www.typescriptlang.org/)
   * [Fuse.js](https://www.fusejs.io/)
