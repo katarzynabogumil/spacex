@@ -18,13 +18,21 @@ const CONFIG = {
 const OPTIONS = {
   query: {},
   options: {
+    sort: {
+      name: 'asc',
+    },
     pagination: false,
     populate: [
       'rocket',
       'launchpad',
+      'crew.crew',
     ]
   },
 };
+
+/**
+ * API call for all launched data, populated with additional data for rocket, launchpads and crew. 
+ */
 
 function getAllLaunches(): Promise<{ docs: Launch[] }> {
   return fetchRequest('', {
@@ -32,6 +40,10 @@ function getAllLaunches(): Promise<{ docs: Launch[] }> {
     body: JSON.stringify(OPTIONS)
   });
 }
+
+/**
+ * API call for data for one launch based on its id. 
+ */
 
 function getLaunch(id: string): Promise<{ docs: Launch[] }> {
   return fetchRequest('', {
@@ -45,7 +57,11 @@ function getLaunch(id: string): Promise<{ docs: Launch[] }> {
   });
 }
 
-function getLaunches(filter: string): Promise<{ docs: Launch[] }> {
+/**
+ * API call for filtered launch data in three categories: upcoming, successful and failed. 
+ */
+
+function getFilteredLaunches(filter: string): Promise<{ docs: Launch[] }> {
   let query: Query = {};
   switch (filter) {
     case ('upcoming'):
@@ -71,6 +87,10 @@ function getLaunches(filter: string): Promise<{ docs: Launch[] }> {
   });
 }
 
+/**
+ * Helper fetching function with global error handler. 
+ */
+
 function fetchRequest<TResponse>(
   url: string,
   config: RequestInit
@@ -83,4 +103,4 @@ function fetchRequest<TResponse>(
     });
 };
 
-export { getAllLaunches, getLaunch, getLaunches };
+export { getAllLaunches, getLaunch, getFilteredLaunches };

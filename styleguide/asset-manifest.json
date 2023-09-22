@@ -1,0 +1,12 @@
+{
+  "files": {
+    "main.js": "/build/bundle.df321eb2.js",
+    "main.css": "/static/css/main.b0ce534f.css",
+    "static/media/searchicon.svg": "/static/media/searchicon.8414715b38832f2a0de1b248970b490c.svg",
+    "index.html": "/index.html"
+  },
+  "entrypoints": [
+    "build/bundle.df321eb2.js",
+    "static/css/main.b0ce534f.css"
+  ]
+}

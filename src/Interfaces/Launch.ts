@@ -1,5 +1,6 @@
 import { Rocket } from './Rocket';
 import { Launchpad } from './Launchpad';
+import { Crew } from './Crew';
 
 export interface Launch {
   fairings: Fairings | null;
@@ -12,7 +13,7 @@ export interface Launch {
   success: boolean | null;
   failures: Failure[];
   details: null | string;
-  crew: Crew[];
+  crew: CrewObj[];
   ships: string[];
   capsules: string[];
   payloads: string[];
@@ -59,8 +60,8 @@ export enum Landpad {
   The5E9E3033383Ecbb9E534E7Cc = "5e9e3033383ecbb9e534e7cc",
 }
 
-export interface Crew {
-  crew: string;
+export interface CrewObj {
+  crew: Crew;
   role: string;
 }
 

@@ -4,8 +4,13 @@ import { Launch } from '../../Interfaces/Launch';
 import './style.css';
 
 interface LaunchProps {
+  /** Launch data to display. */
   launch: Launch
 }
+
+/**
+ * Presentational component for a single launch.
+ */
 
 function LaunchItem ({ launch }: LaunchProps) {
   return (

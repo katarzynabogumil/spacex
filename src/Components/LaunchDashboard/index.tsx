@@ -1,41 +1,53 @@
-import { useState, useEffect, ChangeEvent, ChangeEventHandler } from 'react';
+import { useState, useEffect, ChangeEvent } from 'react';
 
-// import Navbar from './Components/Navbar';
 import LaunchList from '../LaunchList';
 import Spinner from '../Spinner';
 import searchicon from '../../Assets/searchicon.svg';
 
-import * as SpaceXAPI from '../../Services/SpaceXAPI';
+import * as SpaceXAPI from '../../Services/spaceXAPI';
+import { fuseSearch } from '../../Services/fuseSearch';
 import { Launch } from '../../Interfaces/Launch';
 
 import './style.css';
 
+/**
+ * Container Component for the launches list and the search/ filter functionality.
+ * Main App Route.
+ */
+
 function LaunchDashboard() {
   const [loading, setLoading] = useState(true);
   const [launches, setLaunches] = useState<Launch[]>([]);
+  const [searchedLaunches, setSearchedLaunches] = useState<Launch[]>([]);
 
   const OPTIONS = ['all', 'upcoming', 'successful', 'failed'];
-  const [filter, setFilter] = useState(OPTIONS[0]);
+  const [filter, setFilter] = useState(OPTIONS[0]); // eslint-disable-line 
   const [searchphrase, setSearchphrase] = useState('');
 
   useEffect(() => {
     SpaceXAPI.getAllLaunches()
-      .then((data: {docs: Launch[]}) => setLaunches(data.docs))
+      .then((data: {docs: Launch[]}) => {
+        if (data) setLaunches(data.docs);
+      })
       .then(() => setLoading(false));
   }, []);
 
   function handleSearch(event: ChangeEvent<HTMLInputElement>) {
-    setSearchphrase(event?.target?.value || '');
-    // handle search
+    let phrase = event?.target?.value || '';
+    setSearchphrase(phrase);
+    setSearchedLaunches(fuseSearch(phrase, launches));
   }
 
   function handleFilter(event: ChangeEvent<HTMLSelectElement>) {
     let chosen = event?.target?.value || '';
     setFilter(chosen);
+    setSearchphrase('');
 
     setLoading(true);
-    SpaceXAPI.getLaunches(chosen)
-      .then((data: {docs: Launch[]}) => setLaunches(data.docs))
+    SpaceXAPI.getFilteredLaunches(chosen)
+      .then((data: {docs: Launch[]}) => {
+        if (data) setLaunches(data.docs);
+      })
       .then(() => setLoading(false));
   }
 
@@ -56,7 +68,7 @@ function LaunchDashboard() {
       </div>
       <div className="launch-dashboard">
           {!loading ? 
-              <LaunchList launches={launches} />
+              <LaunchList launches={searchedLaunches.length ? searchedLaunches : launches} />
             : (
               <Spinner />
           )}

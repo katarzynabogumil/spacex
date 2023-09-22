@@ -1,11 +1,16 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import * as SpaceXAPI from '../../Services/SpaceXAPI';
+import * as SpaceXAPI from '../../Services/spaceXAPI';
 import { dateFormatter } from '../../Services/dateFormatter';
 import { Launch } from '../../Interfaces/Launch';
 
 import './style.css';
 import Spinner from "../Spinner";
+
+/**
+ * Component with detailed information about each launch.
+ * Seperate App Route.
+ */
 
 function LaunchDetails () {
   let { id } = useParams();
@@ -16,7 +21,9 @@ function LaunchDetails () {
 
   useEffect(() => {
     SpaceXAPI.getLaunch(id || '')
-      .then((data: {docs: Launch[]}) => setLaunch(data.docs))
+      .then((data: {docs: Launch[]}) => {
+        if (data) setLaunch(data.docs);
+      })
       .then(() => setLoading(false));
   }, [id]);
 
@@ -58,8 +65,9 @@ function LaunchDetails () {
               <b>Region: </b> {launch[0].launchpad.region}
               <b>Rocket: </b> {launch[0].rocket.name}
               <b>Rocket decription: </b> {launch[0].rocket.description}
-              
-
+              {launch[0].crew.length > 0 ? <>
+                <b>Crew: </b> {launch[0].crew.map(c => c.crew).join(', ')}
+              </> : ''}
             </div>
           </div>
           )
