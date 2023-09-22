@@ -28,7 +28,7 @@ function LaunchDetails () {
   }, [id]);
 
   const image = launch[0]?.links.flickr.original.length > 0 ? <img
-    className="launch_photo"
+    className="launch-photo"
     alt="launch photograph"
     src={
       launch[0].links.flickr.original[0]
@@ -40,7 +40,7 @@ function LaunchDetails () {
       {!loading ? 
         (
           Object.keys(launch[0]).length > 0 &&
-          (<div>
+          (<div data-testid="launch-details">
             <h2>              
               <span className="material-symbols-outlined arrow-back" onClick={() => navigate(-1)}>
                 arrow_back

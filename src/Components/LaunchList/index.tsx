@@ -14,7 +14,7 @@ interface Launches {
 
 function LaunchList ({ launches }: Launches) {
   return (
-    <div className="launch_list_container" data-testid="launch_list_container">
+    <div className="launch-list-container" data-testid="launch-list-container">
       {launches && (
         launches.map((launch: Launch) => (
           <LaunchItem key={launch.id} launch={launch}/>

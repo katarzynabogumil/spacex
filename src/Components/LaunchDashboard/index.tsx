@@ -54,19 +54,21 @@ function LaunchDashboard() {
   return (
     <>
       <div className="navbar">
-        <img className="search-icon" src={searchicon} alt="search icon" data-testid="navbar_search_icon"/>
+        <img className="search-icon" src={searchicon} alt="search icon"/>
         <input 
           className="search-bar input" 
           type='text' 
           name='title' 
           value={searchphrase} 
           onChange={handleSearch}
+          data-testid="search-bar"
         />
-        <select className="select-bar input" onChange={handleFilter}>
-          {OPTIONS.map(opt => <option value={opt}>{opt[0].toUpperCase()+opt.substring(1)}</option>)}
+        <select className="select-bar input" onChange={handleFilter} data-testid="filter-bar">
+          {OPTIONS.map(opt => <option value={opt} key={opt}>{opt[0].toUpperCase()+opt.substring(1)}</option>)}
         </select>
       </div>
-      <div className="launch-dashboard">
+      <div className="launch-dashboard" data-testid="launch-dashboard">
+        {launches.length}
           {!loading ? 
               <LaunchList launches={searchedLaunches.length ? searchedLaunches : launches} />
             : (
