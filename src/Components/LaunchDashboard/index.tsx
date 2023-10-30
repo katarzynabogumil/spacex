@@ -42,6 +42,7 @@ function LaunchDashboard() {
     let chosen = event?.target?.value || '';
     setFilter(chosen);
     setSearchphrase('');
+    setSearchedLaunches([]);
 
     setLoading(true);
     SpaceXAPI.getFilteredLaunches(chosen)
